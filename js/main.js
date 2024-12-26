@@ -1,5 +1,65 @@
+// app.js
+require('dotenv').config();
+
+const express = require('express');
+const app = express();
+
+const sendinblueApiKey = process.env.SENDINBLUE_API_KEY;
+
+app.get('/', (req, res) => {
+    res.send(`Votre clé API est : ${sendinblueApiKey}`);
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Serveur en cours d'exécution sur le port ${PORT}`);
+});
+
+
 (function ($) {
   "use strict";
+
+// server.js
+const express = require('express');
+const fetch = require('node-fetch');
+require('dotenv').config();
+
+const app = express();
+app.use(express.json());
+
+app.post('/subscribe', async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const response = await fetch('https://api.brevo.com/v3/contacts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': process.env.BREVO_API_KEY // Utilisez la clé API depuis .env
+            },
+            body: JSON.stringify({
+                email: email,
+                listIds: [3] // Remplacez par l'ID de votre liste
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Erreur lors de l\'inscription à la newsletter');
+        }
+
+        res.status(200).send({ message: "Inscription réussie !" });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Serveur en cours d'exécution sur le port ${PORT}`);
+});
+
+
+
 
   // Spinner
   var spinner = function () {
@@ -18,7 +78,8 @@
   $(window).scroll(function () {
     if ($(this).scrollTop() > 300) {
       $(".sticky-top").css("top", "0px");
-    } else {
+    } 
+    else {
       $(".sticky-top").css("top", "-100px");
     }
   });
@@ -134,40 +195,56 @@
   });
 
   $(document).ready(function () {
-    const apiUrl = "https://my-project-i2o4.onrender.com/"; // Remplacez par votre URL
-
+    const apiUrl = "https://my-project-i2o4.onrender.com/"; // Replace with your actual API URL
+  
+    // Fetch car data and display cars in the container
     $.get(apiUrl, function (carData) {
       const $carContainer = $("#car-container");
-
+  
+      // Loop through each car and generate the HTML for each car card
       $.each(carData, function (index, car) {
         const cardHTML = `
-        <div class="col-md-4">
-          <div class="card">
-            <img
-              src="${car.image}"  // Utilise une image par défaut si aucune n'est fournie
-              class="card-img-top "
-              alt="${car.nom}"
-            />
-            <div class="card-body">
-              <h5 class="card-title">${car.nom}</h5>
-              <p class="card-text">
-                Marque: ${car.nom}<br />
-                Boite de vitesse: ${car.boiteDeVitesse}<br />
-                Condition: ${car.condition}<br />
-                Consommation: ${car.consommation}<br />
-                Prix: ${car.prix} FCFA/jour
-              </p>
-              <a href="#" class="btn btn-primary">Réserver</a>
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                src="${car.image}"  // Use a default image if none is provided
+                class="card-img-top"
+                alt="${car.nom}"
+              />
+              <div class="card-body">
+                <h5 class="card-title">${car.nom}</h5>
+                <p class="card-text">
+                  Marque: ${car.nom}<br />
+                  Boite de vitesse: ${car.boiteDeVitesse}<br />
+                  Condition: ${car.condition}<br />
+                  Consommation: ${car.consommation}<br />
+                  Prix: ${car.prix} FCFA/jour
+                </p>
+                <a href="#" class="btn btn-primary reserver-btn" data-car-name="${car.nom}">Réserver</a>
+              </div>
             </div>
           </div>
-        </div>
-      `;
+        `;
         $carContainer.append(cardHTML);
       });
-    }).fail(function (error) {
-      console.error("Erreur lors de la récupération des données:", error);
+  
+      // When the "Réserver" button is clicked
+      $(document).on("click", ".reserver-btn", function (e) {
+        e.preventDefault(); // Prevent default anchor click behavior
+        
+        // Get the car name from the clicked button's data attribute
+        const carName = $(this).data("car-name");
+        
+        // Set the car name in the "Nom du véhicule" input field
+        $("#nomVoiture").val(carName);
+        
+        // Optionally, you can also show the form if it's hidden at this point
+        $(".custom-form").fadeIn();
+        $(".overlay").fadeIn();
+      });
     });
   });
+  
   $.get("https://my-project-i2o4.onrender.com/", function (data) {
     console.log(data);
   }).fail(function (error) {
@@ -182,33 +259,44 @@
 
       $.each(carData, function (index, car) {
         const cardHTML = `
-        <div class="col-md-4">
-          <div class="card">
-            <img
-              src="${
-                car.image || ""
-              }"  // Utilise une image par défaut si aucune n'est fournie
-              class="card-img-top "
-              alt="${car.nom}"
-            />
-            <div class="card-body">
-              <h5 class="card-title">${car.nom}</h5>
-              <p class="card-text">
-                Marque: ${car.nom}<br />
-                Boite de vitesse: ${car.boiteDeVitesse}<br />
-                Condition: ${car.condition}<br />
-                Consommation: ${car.consommation}<br />
-                Prix: ${car.prix} FCFA/jour
-              </p>
-              <a href="#" class="btn btn-primary">Acheter</a>
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                src="${car.image}"  // Use a default image if none is provided
+                class="card-img-top"
+                alt="${car.nom}"
+              />
+              <div class="card-body">
+                <h5 class="card-title">${car.nom}</h5>
+                <p class="card-text">
+                  Marque: ${car.nom}<br />
+                  Boite de vitesse: ${car.boiteDeVitesse}<br />
+                  Condition: ${car.condition}<br />
+                  Consommation: ${car.consommation}<br />
+                  Prix: ${car.prix} FCFA/jour
+                </p>
+                <a href="#" class="btn btn-primary reserver-btn" data-car-name="${car.nom}">Réserver</a>
+              </div>
             </div>
           </div>
-        </div>
-      `;
+        `;
         $carContainer.append(cardHTML);
       });
-    }).fail(function (error) {
-      console.error("Erreur lors de la récupération des données:", error);
+  
+      // When the "Réserver" button is clicked
+      $(document).on("click", ".reserver-btn", function (e) {
+        e.preventDefault(); // Prevent default anchor click behavior
+        
+        // Get the car name from the clicked button's data attribute
+        const carName = $(this).data("car-name");
+        
+        // Set the car name in the "Nom du véhicule" input field
+        $("#nomVoiture").val(carName);
+        
+        // Optionally, you can also show the form if it's hidden at this point
+        $(".custom-form").fadeIn();
+        $(".overlay").fadeIn();
+      });
     });
   });
   $(document).ready(function () {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <title>BIABIA MOTORS</title>
@@ -54,8 +54,8 @@
       flex-direction: column;
       padding: 1em;
       margin: auto;
-      position: fixed;
-      top: 50%;
+      position: absolute;
+      top: 80%;
       left: 50%;
       transform: translate(-50%, -50%);
       background-color: white;
@@ -69,6 +69,41 @@
     .blur-background {
       background-color: rgba(54, 41, 41, 0.384);
     }
+
+     /* Custom Styles */
+  .custom-form {
+        width: 90%;
+        margin: 70px auto;
+        padding: 2em;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .custom-form h2 {
+        text-align: center;
+        margin-bottom: 1.5em;
+        color: #007bff;
+      }
+
+      .form-label {
+        color: #333;
+      }
+
+      .btn-submit {
+        background-color: #007bff;
+        color: white;
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1em;
+        border-radius: 5px;
+        border: none;
+      }
+
+      .btn-submit:hover {
+        background-color: #0056b3;
+        transition: 0.3s ease;
+      }
   
     /* Overlay pour sombre l'arrière-plan */
     .overlay {
@@ -141,7 +176,7 @@
         <div class="col-lg-7 px-5 text-start">
           <div class="h-100 d-inline-flex align-items-center py-3 me-4">
             <small class="fa fa-map-marker-alt text-primary me-2"></small>
-            <small>Au centre ville, Libreville, Gabon</small>
+            <small>Louis, notre Dame de Quaben, Gabon</small>
           </div>
           <div class="h-100 d-inline-flex align-items-center py-3">
             <small class="far fa-clock text-primary me-2"></small>
@@ -186,9 +221,9 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
           <a href="index.html" class="nav-item nav-link">Acceuil</a>
-          <a href="location.html" class="nav-item nav-link active">Location de voiture</a>
-          <a href="Vente.html" class="nav-item nav-link">Vente de voiture</a>
-          <a href="gestion.html" class="nav-item nav-link">Gestion de voiture</a>
+          <a href="location.html" class="nav-item nav-link active">Location de véhicules</a>
+          <a href="Vente.html" class="nav-item nav-link">Vente de véhicules</a>
+          <a href="gestion.html" class="nav-item nav-link">Gestion de véhicules</a>
           <div class="nav-item dropdown">
             <a href="contact.html" class="nav-item nav-link">Contact</a>
           </div>
@@ -204,7 +239,7 @@
           <h1 class="display-3 text-white mb-3 animated slideInDown">Service de Location</h1>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-center text-uppercase">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="index.html">Acceuil</a></li>
               <li class="breadcrumb-item text-white active" aria-current="page">Location</li>
             </ol>
           </nav>
@@ -215,8 +250,8 @@
 
     <!-- Location Start -->
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-      <h6 class="text-primary text-uppercase">// Contact Us //</h6>
-      <h1 class="mb-5">Nos Voitures à Louer</h1>
+      <h6 class="text-primary text-uppercase">// Contactez-Nous //</h6>
+      <h1 class="mb-5">Nos Véhicules à Louer</h1>
     </div>
     <div class="col-12">
       <div class="row gy-4" style="justify-content: center;">
@@ -224,7 +259,7 @@
           <div class="bg-light d-flex flex-column justify-content-center p-4">
             <h5 class="text-uppercase">// General //</h5>
             <p class="m-0">
-              <i class="fa fa-envelope-open text-primary me-2"></i>meyekone@gmail.com
+              <i class="fa fa-envelope-open text-primary me-2"></i>biabiamotors@gmail.com
             </p>
           </div>
         </div>
@@ -238,43 +273,39 @@
         <div class="col-md-4 mb-3"></div>
         <div id="car-container" class="row"></div>
         <div class="overlay"></div> 
-        <form class="custom-form needs-validation " novalidate>
+        <form class="custom-form needs-validation " id="voiture-form" novalidate>
           <div class="w-50">
             <label for="validationCustom01" class="form-label">Nom du véhicule</label>
-            <input type="text" class="form-control" id="validationCustom01" value="" required>
+            <input type="text" class="form-control" id="nomVoiture" value="" required>
             <div class="valid-feedback">Looks good!</div>
           </div>
           <div class="w-50">
-            <label for="validationCustom02" class="form-label">votre nom</label>
-            <input type="text" class="form-control" id="validationCustom02" value="" required>
+            <label for="validationCustom02" class="form-label">votre nom complet</label>
+            <input type="text" class="form-control" id="nomClient" value="" required>
             <div class="valid-feedback">Looks good!</div>
           </div>
-          <div class="w-50">
-            <label for="validationCustom02" class="form-label">prenom</label>
-            <input type="text" class="form-control" id="" value="" required>
-            <div class="valid-feedback">Looks good!</div>
-          </div>
+          
           <div class="w-50">
             <label for="validationCustom02" class="form-label">numero de telephone</label>
-            <input type="number" class="form-control" id="" value="" required>
+            <input type="number" class="form-control" id="numeroTelephone" value="" required>
             <div class="valid-feedback">Looks good!</div>
           </div>
           <div class="w-50">
             <label for="validationCustom02" class="form-label">numero WhatsApp</label>
-            <input type="number" class="form-control" id="" value="Otto" required>
+            <input type="number" class="form-control" id="numeroWhatsapp" value="Otto" required>
             <div class="valid-feedback">Looks good!</div>
           </div>
           <div class="w-50">
             <label for="validationCustomUsername" class="form-label">Adresse mail</label>
             <div class="input-group has-validation">
               <span class="input-group-text" id="inputGroupPrepend">@</span>
-              <input type="email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+              <input type="email" class="form-control" id="adresseMail" aria-describedby="inputGroupPrepend" required>
               <div class="invalid-feedback">Please choose a username.</div>
             </div>
           </div>
           <div class="w-50">
             <label for="validationCustom03" class="form-label">adresse</label>
-            <input type="text" class="form-control" id="validationCustom03" required>
+            <input type="text" class="form-control" id="adresse" required>
             <div class="invalid-feedback">Please provide a valid city.</div>
           </div>
           <div class="w-50">
@@ -297,8 +328,14 @@
             <label class="form-check-label" for="invalidCheck">Acceptez vous les termes et conditions</label>
             <div class="invalid-feedback">You must agree before submitting.</div>
           </div>
-          <button class="btn btn-primary" type="submit">Submit form</button>
+          <button class="btn text-primary" type="submit">Submit form</button>
         </form>
+
+        <div class="confirmation-message" id="confirmation-message">
+          <i class="fas fa-check-circle"></i>
+          <p>Votre demande a été envoyée avec succès !</p>
+          <button id="continue-button">Continuer</button>
+        </div>
       </div>
     </div>
 
@@ -309,8 +346,7 @@
           <div class="col-lg-3 col-md-6">
             <h4 class="text-light mb-4">Address</h4>
             <p class="mb-2">
-              <i class="fa fa-map-marker-alt me-3"></i>Au centre ville, Libreville, GABON
-            </p>
+              <i class="fa fa-map-marker-alt me-3"></i>Louis, notre Dame de Quaben, Gabon
             <p class="mb-2">
               <i class="fa fa-phone-alt me-3"></i>+241 074638595
             </p>
@@ -332,18 +368,64 @@
           </div>
           <div class="col-lg-3 col-md-6">
             <h4 class="text-light mb-4">Services</h4>
-            <a class="btn btn-link" href="location.html">Location de voitures</a>
-            <a class="btn btn-link" href="Vente.html">Vente de voitures</a>
+            <a class="btn btn-link" href="location.html">Location de véhicules</a>
+            <a class="btn btn-link" href="Vente.html">Vente de véhicules</a>
             <a class="btn btn-link" href="gestion.html">Gestion de véhicules</a>
           </div>
           <div class="col-lg-3 col-md-6">
             <h4 class="text-light mb-4">Newsletter</h4>
-            <p>Enregistrez-vous à notre newsletter pour ne rien rater.</p>
+            <p>Enregistrez vous à notre newsletter pour ne rien rater.</p>
             <div class="position-relative mx-auto" style="max-width: 400px">
-              <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email" />
-              <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                <input
+                    id="emailInput"
+                    class="form-control border-0 w-100 py-3 ps-4 pe-5"
+                    type="email"
+                    placeholder="Votre email"
+                    required
+                />
+                <button
+                    id="signupButton"
+                    type="button"
+                    class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"
+                    onclick="subscribeNewsletter()"
+                >
+                    S'inscrire
+                </button>
             </div>
-          </div>
+        </div>
+        
+        <script>
+          async function subscribeNewsletter() {
+              const email = document.getElementById('emailInput').value;
+      
+              // Vérification du format de l'email
+              const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              if (!email || !emailPattern.test(email)) {
+                  alert("Veuillez entrer un email valide.");
+                  return;
+              }
+      
+              try {
+                  const response = await fetch('/subscribe', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({ email })
+                  });
+      
+                  if (!response.ok) {
+                      throw new Error('Erreur lors de l\'inscription à la newsletter');
+                  }
+      
+                  alert("Inscription réussie !");
+                  document.getElementById('emailInput').value = ''; // Réinitialiser le champ
+              } catch (error) {
+                  alert(error.message);
+              }
+          }
+      </script>
+      
         </div>
       </div>
       <div class="container">
@@ -386,51 +468,58 @@
       // Attacher l'événement de soumission du formulaire
       $("#voiture-form").submit(function(e) {
         e.preventDefault(); // Empêcher l'envoi du formulaire par défaut
+        
+        // Vérifier si le formulaire est valide
+        if ($("#voiture-form")[0].checkValidity()) {
+          // Si le formulaire est valide, récupérer les données
+          const voitureData = {
+            nomVoiture: $("#nomVoiture").val(),
+            nomClient: $("#nomClient").val(),
+            numeroTelephone: $("#numeroTelephone").val(),
+            numeroWhatsapp: $("#numeroWhatsapp").val(),
+            adresseMail: $("#adresseMail").val(),
+            adresse: $("#adresse").val(),
+            couleur: $("#validationCustom04").val(),
+            commentaire: $("#validationCustom05").val()
+          };
+          
+          // Envoi des données via AJAX
+          $.ajax({
+            url: 'https://my-project-i2o4.onrender.com/commande',  // Remplacez cette URL par l'URL de votre API
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(voitureData),  // Convertir les données en JSON
+            success: function(response) {
+              console.log('Données envoyées avec succès:', response);
+              // Vous pouvez afficher un message ou rediriger l'utilisateur après le succès
+            },
+            error: function(xhr, status, error) {
+              console.error('Erreur lors de l\'envoi:', error);
+              // Afficher un message d'erreur à l'utilisateur
+            }
+          });
+          
+          // Simuler l'envoi de données et afficher le message de confirmation
+          console.log("Formulaire envoyé:", voitureData);
     
-        // Récupérer les données du formulaire
-        const voitureData = {
-          nomVoiture: $("#nomVoiture").val(),
-          nomClient: $("#nomClient").val(),
-          numeroTelephone: $("#numeroTelephone").val(),
-          numeroWhatsapp: $("#numeroWhatsapp").val(),
-          adresseMail: $("#adresseMail").val(),
-          adresse: $("#adresse").val()
-        };
+          // Afficher le message de confirmation
+          $("#confirmation-message").fadeIn();
+          $(".overlay").fadeIn(); // Afficher l'overlay
     
-        // Envoi des données via AJAX
-        $.ajax({
-          url: 'https://my-project-i2o4.onrender.com/commande',  // Remplacez cette URL par l'URL de votre API
-          type: 'POST',
-          contentType: 'application/json',
-          data: JSON.stringify(voitureData),  // Convertir les données en JSON
-          success: function(response) {
-            console.log('Données envoyées avec succès:', response);
-            // Vous pouvez afficher un message ou rediriger l'utilisateur après le succès
-          },
-          error: function(xhr, status, error) {
-            console.error('Erreur lors de l\'envoi:', error);
-            // Afficher un message d'erreur à l'utilisateur
-          }
-        });
-           // Simuler l'envoi de données et afficher le message de confirmation
-           console.log("Formulaire envoyé:", voitureData);
+          // Masquer le formulaire
+          $(".custom-form").fadeOut();
+        } else {
+          // Si le formulaire n'est pas valide, afficher un message d'erreur ou indiquer la non-validité
+          $(".invalid-feedback").fadeIn();
+        }
+      });
     
-    // Afficher le message de confirmation
-    $("#confirmation-message").fadeIn();
-    $(".overlay").fadeIn(); // Afficher l'overlay
-    
-    // Masquer le formulaire
-    $(".custom-form").fadeOut();
-  });
-
-  // Lorsque le bouton "Continuer" est cliqué, réinitialiser le formulaire
-  $("#continue-button").click(function() {
-    $("#confirmation-message").fadeOut(); // Cacher le message de confirmation
-    $(".overlay").fadeOut(); // Cacher l'overlay
-    $("#voiture-form")[0].reset(); // Réinitialiser le formulaire
-});
-
-      
+      // Lorsque le bouton "Continuer" est cliqué, réinitialiser le formulaire
+      $("#continue-button").click(function() {
+        $("#confirmation-message").fadeOut(); // Cacher le message de confirmation
+        $(".overlay").fadeOut(); // Cacher l'overlay
+        $("#voiture-form")[0].reset(); // Réinitialiser le formulaire
+      });
     </script>
     <script>
    
